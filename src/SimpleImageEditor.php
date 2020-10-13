@@ -28,6 +28,7 @@ final class SimpleImageEditor
                     break;
                 case 'L':
                     // Colour a pixel with the received color, eg: L x y C
+                    $this->image->updatePixelColor((int) $params[1],(int) $params[2], $params[3]);
                     break;
                 case 'V':
                     // Draw vertical segment, eg: V x y1 y2 C
