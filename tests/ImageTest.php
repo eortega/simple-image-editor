@@ -6,6 +6,7 @@ namespace eortega\SimpleImageEditor\Tests;
 
 use PHPUnit\Framework\TestCase;
 use eortega\SimpleImageEditor\Image;
+use eortega\SimpleImageEditor\Pixel;
 
 /**
  * @covers Image
@@ -128,8 +129,8 @@ class ImageTest extends TestCase
      */
     public function testFindPixelsWithColor(): void
     {
-        $expectedF = [['x' => 4, 'y' =>0], ['x' => 2, 'y' =>1]];
-        $expectedH = [['x' => 4, 'y' =>2]];
+        $expectedF = [new Pixel(4, 0, 'F'), new Pixel(2,1, 'F')];
+        $expectedH = [new Pixel(4, 2, 'H')];
 
         $imgX5Y3 = new Image(5, 3);
         $imgX5Y3->updatePixelColor(3, 2, 'F');
@@ -139,9 +140,7 @@ class ImageTest extends TestCase
         $whereisF = $imgX5Y3->findPixelsWithColor('F');
         $whereisH = $imgX5Y3->findPixelsWithColor('H');
 
-
-        self::assertSame($expectedF, $whereisF);
-        self::assertSame($expectedH, $whereisH);
-
+        self::assertEquals($expectedF, $whereisF);
+        self::assertEquals($expectedH, $whereisH);
     }
 }

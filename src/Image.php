@@ -68,7 +68,7 @@ final class Image
 
         for ($y=0; $y <= $this->height; $y++) {
             for ($x=0; $x <= $this->width; $x++) {
-                $this->layout[$y][$x] !== $color ? : $pixels [] = ['x' => $x, 'y' => $y];
+                $this->layout[$y][$x] !== $color ? : $pixels [] = new Pixel ($x, $y, $color);
             }
         }
 
