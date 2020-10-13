@@ -47,4 +47,11 @@ final class Image
     {
         $this->layout[$y - 1][$x - 1] = $color;
     }
+
+    public function drawVerticalLine(int $column, int $start, int $end, string $color): void
+    {
+        for ($y=$start; $y <= $end; $y++) {
+            $this->updatePixelColor($column, $y, $color);
+        }
+    }
 }

@@ -32,6 +32,7 @@ final class SimpleImageEditor
                     break;
                 case 'V':
                     // Draw vertical segment, eg: V x y1 y2 C
+                    $this->image->drawVerticalLine((int) $params[1],(int) $params[2], (int) $params[3], $params[4]);
                     break;
                 case 'H':
                     // Draw an horizontal segment, eg: V x1 x2 y C
