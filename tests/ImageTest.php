@@ -122,4 +122,26 @@ class ImageTest extends TestCase
 
         self::assertSame($expected, $imgX5Y3->getLayout());
     }
+
+    /**
+     * @covers Image::FindPixelsWithColor
+     */
+    public function testFindPixelsWithColor(): void
+    {
+        $expectedF = [['x' => 4, 'y' =>0], ['x' => 2, 'y' =>1]];
+        $expectedH = [['x' => 4, 'y' =>2]];
+
+        $imgX5Y3 = new Image(5, 3);
+        $imgX5Y3->updatePixelColor(3, 2, 'F');
+        $imgX5Y3->updatePixelColor(5, 1, 'F');
+        $imgX5Y3->updatePixelColor(5, 3, 'H');
+
+        $whereisF = $imgX5Y3->findPixelsWithColor('F');
+        $whereisH = $imgX5Y3->findPixelsWithColor('H');
+
+
+        self::assertSame($expectedF, $whereisF);
+        self::assertSame($expectedH, $whereisH);
+
+    }
 }

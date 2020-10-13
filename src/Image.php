@@ -61,4 +61,17 @@ final class Image
             $this->updatePixelColor($x, $row, $color);
         }
     }
+
+    public function findPixelsWithColor(string $color): array
+    {
+        $pixels = [];
+
+        for ($y=0; $y <= $this->height; $y++) {
+            for ($x=0; $x <= $this->width; $x++) {
+                $this->layout[$y][$x] !== $color ? : $pixels [] = ['x' => $x, 'y' => $y];
+            }
+        }
+
+        return $pixels;
+    }
 }
