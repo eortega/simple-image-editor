@@ -54,4 +54,11 @@ final class Image
             $this->updatePixelColor($column, $y, $color);
         }
     }
+
+    public function drawHorizontalLine(int $start, int $end, int $row, string $color): void
+    {
+        for ($x=$start; $x <= $end; $x++) {
+            $this->updatePixelColor($x, $row, $color);
+        }
+    }
 }

@@ -95,4 +95,31 @@ class ImageTest extends TestCase
 
         self::assertSame($expected, $imgX5Y3->getLayout());
     }
+
+    /**
+     * @covers Image::drawHorizontalLine
+     */
+    public function testDrawHorizontalLine(): void
+    {
+        $expectedX5Y3 = [
+            ['O', 'O', 'F', 'F', 'F'],
+            ['O', 'O', 'O', 'O', 'O'],
+            ['X', 'X', 'X', 'X', 'X'],
+        ];
+
+        $imgX5Y3 = new Image(5, 3);
+        $imgX5Y3->drawHorizontalLine(3, 5, 1, 'F');
+        $imgX5Y3->drawHorizontalLine(1, 5, 3, 'X');
+        self::assertSame($expectedX5Y3, $imgX5Y3->getLayout());
+
+        $expected = [
+            ['O', 'O', 'F', 'F', 'F'],
+            ['Z', 'Z', 'Z', 'O', 'O'],
+            ['X', 'X', 'X', 'X', 'X'],
+        ];
+
+        $imgX5Y3->drawHorizontalLine(1, 3, 2, 'Z');
+
+        self::assertSame($expected, $imgX5Y3->getLayout());
+    }
 }
