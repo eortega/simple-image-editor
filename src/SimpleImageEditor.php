@@ -5,7 +5,7 @@ require_once('vendor/autoload.php');
 
 final class SimpleImageEditor
 {
-    private $image;
+    private Image $image;
 
     public function __construct()
     {
@@ -20,7 +20,7 @@ final class SimpleImageEditor
             switch ($params[0]) {
                 case 'I':
                     //Creates a new image, eg: I 10 5
-                    $this->image = new Image(10, 5);
+                    $this->image = new Image((int) $params[1], (int) $params[2]);
                     break;
                 case 'C':
                     //Clear the current image
