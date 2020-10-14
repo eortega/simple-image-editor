@@ -129,8 +129,9 @@ class ImageTest extends TestCase
      */
     public function testFindPixelsWithColor(): void
     {
-        $expectedF = [new Pixel(4, 0, 'F'), new Pixel(2,1, 'F')];
-        $expectedH = [new Pixel(4, 2, 'H')];
+        $expectedF[4][0] = new Pixel(4,0, 'F');
+        $expectedF[2][1] = new Pixel(2,1, 'F');
+        $expectedH[4][2] = new Pixel(4,2, 'H');
 
         $imgX5Y3 = new Image(5, 3);
         $imgX5Y3->updatePixelColor(3, 2, 'F');
