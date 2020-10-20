@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace eortega\SimpleImageEditor;
 
-final class RegionFinderByNeighbours implements RegionFinder
+class RegionFinderByNeighbours implements RegionFinder
 {
     public function find(Pixel $pixel, Image $image): array
     {

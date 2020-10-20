@@ -7,6 +7,7 @@ namespace eortega\SimpleImageEditor\Tests;
 use PHPUnit\Framework\TestCase;
 use eortega\SimpleImageEditor\Image;
 use eortega\SimpleImageEditor\Pixel;
+use eortega\SimpleImageEditor\RegionFinderByNeighbours;
 
 /**
  * @covers Image
@@ -122,5 +123,33 @@ class ImageTest extends TestCase
         $imgX5Y3->drawHorizontalLine(1, 3, 2, 'Z');
 
         self::assertSame($expected, $imgX5Y3->getLayout());
+    }
+
+    /**
+     * @covers Image::drawByRegion
+     */
+    public function testDrawByRegion(): void
+    {
+        $expectedX3Y3 = [
+            ['X', 'O', 'X'],
+            ['O', 'X', 'O'],
+            ['X', 'O', 'X']
+        ];
+
+        $region = [
+            new Pixel(1, 1, 'X'),
+            new Pixel(3, 1, 'X'),
+            new Pixel(2, 2, 'X'),
+            new Pixel(1, 3, 'X'),
+            new Pixel(3, 3, 'X'),
+        ];
+
+        $imgX3Y3 = new Image(3, 3);
+
+        $stub = $this->createStub(RegionFinderByNeighbours::class);
+        $stub->method('find')->willReturn($region);
+
+        $imgX3Y3->drawByRegion('X', 1, 1, $stub);
+        self::assertSame($expectedX3Y3, $imgX3Y3->getLayout());
     }
 }

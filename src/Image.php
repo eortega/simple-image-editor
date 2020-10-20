@@ -71,4 +71,14 @@ final class Image
             $this->updatePixelColor($x, $row, $color);
         }
     }
+
+    public function drawByRegion(string $color, int $x, int $y, RegionFinder $regionFinder): void
+    {
+        $pixel = new Pixel($x, $y, $color);
+        $region = $regionFinder->find($pixel, $this);
+        /** @var $p Pixel */
+        foreach($region as $p) {
+            $this->updatePixelColor($p->getX(), $p->getY(), $color);
+        }
+    }
 }

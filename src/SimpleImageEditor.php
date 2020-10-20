@@ -39,7 +39,13 @@ final class SimpleImageEditor
                     $this->image->drawHorizontalLine((int) $params[1],(int) $params[2], (int) $params[3], $params[4]);
                     break;
                 case 'F':
-                    // Draw an region , eg: V x y C
+                    // Draw a region , eg: V x y C
+                    $this->image->drawByRegion(
+                        $params[3],
+                        (int) $params[1],
+                        (int) $params[2],
+                        new RegionFinderByNeighbours()
+                    );
                     break;
                 case 'S':
                     $this->image->print();
