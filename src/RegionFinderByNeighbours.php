@@ -8,9 +8,13 @@ class RegionFinderByNeighbours implements RegionFinder
 {
     public function find(Pixel $pixel, Image $image): array
     {
-        // TODO: Implement find() method.
-        $r[$pixel->getX()][$pixel->getY()] = $pixel;
+        $r = [];
+        //Pixels with the same color as received $pixel belongs to R, $pixel inclusive
+        $r+= $this->findPixelsWithColor($pixel->getColor(), $image);
+        /* @todo verifiy if P(x,y) shares a common side with any pixel in R. $pixel belongs to R
+         */
 
+        return $r;
     }
 
     public function findPixelsWithColor(string $color, Image $image): array
