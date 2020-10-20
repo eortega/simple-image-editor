@@ -24,6 +24,16 @@ final class Image
         return $this->layout;
     }
 
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    public function getHeight(): int
+    {
+        return $this->height;
+    }
+
     public function void() : void
     {
         $this->layout = array_fill(
@@ -60,18 +70,5 @@ final class Image
         for ($x=$start; $x <= $end; $x++) {
             $this->updatePixelColor($x, $row, $color);
         }
-    }
-
-    public function findPixelsWithColor(string $color): array
-    {
-        $pixels = [];
-
-        for ($y=0; $y <= $this->height; $y++) {
-            for ($x=0; $x <= $this->width; $x++) {
-                $this->layout[$y][$x] !== $color ? : $pixels [$x][$y] = new Pixel ($x, $y, $color);
-            }
-        }
-
-        return $pixels;
     }
 }
