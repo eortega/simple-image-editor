@@ -20,14 +20,19 @@ class RegionFinderByNeighboursTest extends TestCase
      */
     public function testFindPixelsWithColor(): void
     {
-        $expectedF[4][0] = new Pixel(4,0, 'F');
-        $expectedF[2][1] = new Pixel(2,1, 'F');
-        $expectedH[4][2] = new Pixel(4,2, 'H');
+        $expectedF[3][2] = new Pixel(3,2, 'F');
+        $expectedF[5][1] = new Pixel(5,1, 'F');
+        $expectedH[5][3] = new Pixel(5,3, 'H');
 
         $imgX5Y3 = new Image(5, 3);
         $imgX5Y3->updatePixelColor(3, 2, 'F');
         $imgX5Y3->updatePixelColor(5, 1, 'F');
         $imgX5Y3->updatePixelColor(5, 3, 'H');
+        /*
+         ['O', 'O', 'O', 'O', 'F']
+         ['O', 'O', 'F', 'O', 'O']
+         ['O', 'O', 'O', 'O', 'H']
+         */
 
         $regionFinder = new RegionFinderByNeighbours;
         $whereIsF = $regionFinder->findPixelsWithColor('F', $imgX5Y3);
