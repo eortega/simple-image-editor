@@ -87,31 +87,29 @@ class RegionFinderByNeighboursTest extends TestCase
      */
     public function testFind(): void
     {
-        $expectedRegion[4][1] = new Pixel(4,1, 'F');
-        $expectedRegion[5][1] = new Pixel(5,1, 'F');
-        $expectedRegion[3][2] = new Pixel(3,2, 'F');
-        //$expectedRegion[5][2] = new Pixel(5,2, 'F');
-        //$expectedRegion[5][3] = new Pixel(5,3, 'F');
+        $expectedRegion  = [
+            new Pixel(4,1, 'F'),
+            new Pixel(5,1, 'F'),
+            new Pixel(3,2, 'F')
+            //new Pixel(5,3, 'F') Don't belong to R cause doesn't have a neighbour in R
+        ];
 
-        $imgX5Y3 = new Image(5, 3);
-        $imgX5Y3->updatePixelColor(4, 1, 'F');
-        $imgX5Y3->updatePixelColor(5, 1, 'F');
-        $imgX5Y3->updatePixelColor(3, 2, 'F');
-        //$imgX5Y3->updatePixelColor(5, 2, 'F');
-        $imgX5Y3->updatePixelColor(5, 3, 'F');
+        $img = new Image(5, 4);
+        $img->updatePixelColor(4, 1, 'F');
+        $img->updatePixelColor(5, 1, 'F');
+        $img->updatePixelColor(3, 2, 'F');
+        $img->updatePixelColor(5, 3, 'F');
+        $img->updatePixelColor(1, 4, 'F');
         /*
           ['O', 'O', 'O', 'F', 'F']
           ['O', 'O', 'F', 'O', 'O']
           ['O', 'O', 'O', 'O', 'F']
+          ['F', 'O', 'O', 'O', 'F']
          */
 
         $regionFinder = new RegionFinderByNeighbours;
-        $region = $regionFinder->find(new Pixel(3,2, 'F'), $imgX5Y3);
-        //echo "\n region\n";
-        //print_r($region);
+        $region = $regionFinder->find(new Pixel(3,2, 'F'), $img);
         self::assertTrue(true);
-        //self::assertEquals($expectedRegion, $region);
+        self::assertEquals($expectedRegion, $region);
     }
-
-
 }

@@ -14,12 +14,26 @@ class RegionFinderByNeighbours implements RegionFinder
     public function find(Pixel $pixel, Image $image): array
     {
         $r = [];
+        $region = [];
         //Pixels with the same color as received $pixel belongs to R, $pixel inclusive
         $r+= $this->findPixelsWithColor($pixel->getColor(), $image);
         /* @todo verifiy if P(x,y) shares a common side with any pixel in R. $pixel belongs to R
          */
+        for($y = 1; $y<= $image->getHeight(); $y++) {
+            for($x = 1; $x<= $image->getWidth(); $x++) {
+                if(!isset($r[$x][$y])) {
+                    continue;
+                }
 
-        return $r;
+                if($this->pixelHasNeighbours($r[$x][$y], $image, $r)) {
+                    $region[] = $r[$x][$y];
+                } else {
+                    unset($r[$x][$y]);
+                }
+            }
+        }
+
+        return $region;
     }
 
     public function findPixelsWithColor(string $color, Image $image): array
