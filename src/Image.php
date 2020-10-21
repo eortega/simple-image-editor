@@ -74,7 +74,8 @@ final class Image
 
     public function drawByRegion(string $color, int $x, int $y, RegionFinder $regionFinder): void
     {
-        $pixel = new Pixel($x, $y, $color);
+        $currentColor = $this->layout[$y][$x];
+        $pixel = new Pixel($x, $y, $currentColor);
         $region = $regionFinder->find($pixel, $this);
         /** @var $p Pixel */
         foreach($region as $p) {
