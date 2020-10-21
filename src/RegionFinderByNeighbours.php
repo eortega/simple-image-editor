@@ -6,6 +6,11 @@ namespace eortega\SimpleImageEditor;
 
 class RegionFinderByNeighbours implements RegionFinder
 {
+    /**
+     * @param Pixel $pixel
+     * @param Image $image
+     * @return array eg: [Pixel(4, 5, 'color'), Pixel(2, 3, 'color')]
+     */
     public function find(Pixel $pixel, Image $image): array
     {
         $r = [];
@@ -28,5 +33,34 @@ class RegionFinderByNeighbours implements RegionFinder
         }
 
         return $pixels;
+    }
+
+    public function pixelHasNeighbours(Pixel $pixel, Image $image, array $region): bool
+    {
+        for($y = $pixel->getY() - 1; $y <= $pixel->getY() + 1; $y++) {
+
+            if($y < 1 || $y > $image->getHeight()) {
+                continue;
+            }
+
+            for($x = $pixel->getX() - 1; $x <= $pixel->getX() + 1; $x++) {
+
+                if($x < 1 || $x > $image->getWidth()) {
+                    continue;
+                }
+
+                //Check is not pixel under review
+                if($x === $pixel->getX() && $y === $pixel->getY()) {
+                    continue;
+                }
+
+                //[x][y] is part of r?
+                if(isset($region[$x][$y])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
